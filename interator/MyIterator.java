@@ -53,12 +53,12 @@ public class MyIterator<E> implements Iterator<E>
 			throw new ConcurrentModificationException();
 		}
 		
-		if(elemBefore == null) {
+		/*if(elemBefore == null) {		//First try, but doesn't work yet
 			list.reset();
 			list.begin = currentEntry.next;
 		} else {
 			elemBefore.next = currentEntry.next;
-		}
+		}*/
 	}
 
 }
