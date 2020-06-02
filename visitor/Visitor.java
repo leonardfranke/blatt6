@@ -1,4 +1,4 @@
-package visitor;
+package blatt6.visitor;
 
 /**
  * Classes that implement the interface Visitor assure that the implement the

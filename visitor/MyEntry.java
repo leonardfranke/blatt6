@@ -1,4 +1,4 @@
-package visitor;
+package blatt6.visitor;
 
 /**
  * An Entry holds an Object <code>o</code> and a reference <code>next</code> to

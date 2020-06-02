@@ -1,4 +1,4 @@
-package visitor;
+package blatt6.visitor;
 
 /**
  * Classes implementing the Visitable interface assure that they accept a

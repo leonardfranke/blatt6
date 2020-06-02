@@ -1,4 +1,4 @@
-package visitor;
+package blatt6.visitor;
 
 import java.util.NoSuchElementException;
 
@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
  * @author Lars Huning
  * 
  */
-public class MyList<E> implements Cloneable {
+public class MyList<E> implements Cloneable, Visitable<E> {
 
 	/**
 	 * Reference on the first Entry of this List
@@ -155,6 +155,19 @@ public class MyList<E> implements Cloneable {
 		if (!begin.equals(other.begin))
 			return false;
 		return true;
+	}
+
+	@Override
+	public void accept(Visitor<E> v)
+	{
+		MyEntry<E> currentEntry = begin;
+		
+		boolean goOnVisiting = true;
+		while(currentEntry != null && goOnVisiting) {			
+			goOnVisiting = v.visit(currentEntry.o);
+			currentEntry = currentEntry.next;
+		}
+		
 	}
 
 }
