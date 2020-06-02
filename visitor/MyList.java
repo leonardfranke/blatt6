@@ -160,7 +160,7 @@ public class MyList<E> implements Cloneable, Visitable<E> {
 	@Override
 	public void accept(Visitor<E> v)
 	{
-		MyEntry<E> currentEntry = begin;
+		MyEntry<E> currentEntry = begin.next;
 		
 		boolean goOnVisiting = true;
 		while(currentEntry != null && goOnVisiting) {			
