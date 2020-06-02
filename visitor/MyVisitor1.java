@@ -6,8 +6,8 @@ public class MyVisitor1<E> implements Visitor<E>
 	@Override
 	public boolean visit(E o)
 	{
-		// TODO Auto-generated method stub
-		return false;
+		System.out.println(o);
+		return true;
 	}
 
 	
