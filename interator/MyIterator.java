@@ -12,6 +12,7 @@ public class MyIterator<E> implements Iterator<E>
 	MyEntry<E> currentEntry;
 	
 	private int modCountAtCreation;
+	private int nextCounter;
 	
 	
 	public MyIterator(MyList<E> list, MyEntry<E> first){
@@ -42,6 +43,7 @@ public class MyIterator<E> implements Iterator<E>
 			throw new NoSuchElementException();
 		}
 		
+		nextCounter++;
 		elemBefore = currentEntry;
 		currentEntry = currentEntry.next;
 		return elemBefore.o;
@@ -53,12 +55,13 @@ public class MyIterator<E> implements Iterator<E>
 			throw new ConcurrentModificationException();
 		}
 		
-		/*if(elemBefore == null) {		//First try, but doesn't work yet
-			list.reset();
-			list.begin = currentEntry.next;
-		} else {
-			elemBefore.next = currentEntry.next;
-		}*/
+		/*list.reset();
+		for(int i = 1; i < nextCounter; i++) {
+			list.advance();
+		}
+		list.delete();
+		modCountAtCreation++;*/
+		
 	}
 
 }

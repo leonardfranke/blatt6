@@ -41,7 +41,7 @@ public class TestIterator
 		while(iterator.hasNext()) {
 			count ++;
 			iterator.remove();
-			iterator.next();
+			iterator.next();			
 		}		
 		assert count == 4;
 		
