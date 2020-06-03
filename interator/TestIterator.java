@@ -34,34 +34,25 @@ public class TestIterator
 		list.add(5);
 		list.add(2);
 		list.add(7);
+		list.add(1);
+		list.add(9);
 		
 		MyIterator<Integer> iterator = (MyIterator<Integer>) list.iterator();
 		
+		iterator.remove();
+		iterator.remove();
+		iterator.remove();
+		iterator.remove();
+		
 		int count = 0;
 		while(iterator.hasNext()) {
-			count ++;
-			iterator.remove();
-			iterator.next();			
+			count++;
+			iterator.next();
 		}		
-		assert count == 4;
+		assert count == 2;	
 		
 		
-		MyList<Integer> list2 = new MyList<Integer>();		
-		list2.add(3);
-		list2.add(5);
-		list2.add(2);
-		list2.add(7);
-		
-		MyIterator<Integer> iterator2 = (MyIterator<Integer>) list2.iterator();
-		
-		iterator2.remove();
-		
-		int count2 = 0;
-		while(iterator2.hasNext()) {
-			count2++;
-			iterator2.next();
-		}		
-		assert count2 == 3;	
+	
 	}
 	
 	

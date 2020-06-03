@@ -55,12 +55,12 @@ public class MyIterator<E> implements Iterator<E>
 			throw new ConcurrentModificationException();
 		}
 		
-		/*list.reset();
-		for(int i = 1; i < nextCounter; i++) {
+		list.reset();
+		for(int i = 0; i < nextCounter; i++) {
 			list.advance();
 		}
 		list.delete();
-		modCountAtCreation++;*/
+		modCountAtCreation++;
 		
 	}
 
