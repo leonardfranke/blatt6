@@ -11,7 +11,7 @@ public class TestVisitor
 	}
 
 	
-	public void testVisitor1() {
+	public void testVisitor1() {					//erster Visitor durchläuft alle Elemente und sollte somit alle 4 Elemente in der Konsole ausgeben
 		MyVisitor1<Integer> visitor1 = new MyVisitor1<Integer>();
 		MyList<Integer> list = new MyList<Integer>();
 		list.add(3);		
@@ -21,7 +21,7 @@ public class TestVisitor
 		list.accept(visitor1);
 	}
 	
-	public void testVisitor2() {
+	public void testVisitor2() {				//zweiter Visitor durchläuft das Array bis er den String "Ende" gefunden hat und gibt dann aus ob es gefunden wurde
 		MyVisitor2<String> visitor2 = new MyVisitor2<String>();
 		MyList<String> list = new MyList<String>();
 		list.add("Du");
