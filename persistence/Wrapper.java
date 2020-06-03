@@ -45,8 +45,14 @@ public class Wrapper
 	}
 	
 	public void set(int pos, int val) {
-		this.array[pos] = val;
-				
+		this.array[pos] = val;		
+		try {
+			this.file.seek(pos*4);
+			this.file.writeInt(val);
+		} catch (IOException e) {
+			System.err.println("Error while overwriting new value in file!");
+			e.printStackTrace();
+		}
 	}
 	
 	public void closeFile() {
@@ -59,7 +65,31 @@ public class Wrapper
 	}
 	
 	private void writeArrayIntoFile() {
-		this.file.
+		try {
+			this.file.setLength(0);
+			this.file.seek(0);
+			for(int i = 0; i < this.array.length; i++) {
+				this.file.writeInt(this.array[i]);
+			}			
+		} catch (IOException e) {
+			System.err.println("Error while overwriting the new array");
+			e.printStackTrace();
+		}		
+	}
+	
+	private int[] getArrayFromFile(RandomAccessFile file) {
+		int[] arr = null;
+		try {
+			arr = new int[(int) (file.length()/4)];
+			for(int i = 0; i < file.length()/4 ; i++) {
+				file.seek((i*4));
+				arr[i] = file.readInt();				
+			}
+		} catch(IOException e) {
+			System.err.println("Error while reading the file!");
+			e.printStackTrace();
+		}
+		return arr;
 	}
 	
 	
