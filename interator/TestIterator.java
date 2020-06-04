@@ -1,17 +1,20 @@
 package blatt6.interator;
 
+import java.util.ConcurrentModificationException;
+import java.util.NoSuchElementException;
+
 public class TestIterator
 {
 
 	public static void main(String[] args)
 	{
 		TestIterator test = new TestIterator();
-		test.testDurchlauf();
+		test.testIteration();
 		test.testRemove();
-		test.testException();
+		test.testExceptions();
 	}
 	
-	public void testDurchlauf() {
+	public void testIteration() {
 		MyList<Integer> list = new MyList<Integer>();		
 		list.add(3);
 		list.add(5);
@@ -25,7 +28,7 @@ public class TestIterator
 			count++;
 			iterator.next();
 		}		
-		assert count == 4;		
+		assertInt(count, 4,"The iterator is not at the end in testIteration");
 	}
 	
 	public void testRemove() {
@@ -39,39 +42,61 @@ public class TestIterator
 		
 		MyIterator<Integer> iterator = (MyIterator<Integer>) list.iterator();
 		
+		iterator.next();
 		iterator.remove();
+		iterator.next();
 		iterator.remove();
-		iterator.remove();
+		iterator.next();
 		iterator.remove();
 		
 		int count = 0;
-		while(iterator.hasNext()) {
+		list.reset();
+		while(!list.endpos()) {
+			list.advance();
 			count++;
-			iterator.next();
-		}		
-		assert count == 2;	
-		
-		
-	
+		}
+		assertInt(count,3,"deletion of elements using iterator doesnt return the correct number of remaining elements");
 	}
 	
 	
-	public void testException() {
+	public void testExceptions() {
 		MyList<Integer> list = new MyList<Integer>();	
 		MyIterator<Integer> iterator = (MyIterator<Integer>) list.iterator();
-		list.add(3);
-		//iterator.next();
-		
+		int i = 0;
+
+		try {
+			iterator.remove();
+		} catch (IllegalStateException e) {
+			i = 1;
+		}
+		assertInt(i,1,"The Illegal State exception when calling remove without using next is not thrown.");
+
+		i = 0;
 		list.add(5);
+		try {
+			iterator.next();
+		} catch (ConcurrentModificationException c) {
+			i = 1;
+		}
+		assertInt(i,1,"The Concurrent Modification exception when calling next on a modified list is not thrown");
+
+		i = 0;
 		iterator = (MyIterator<Integer>) list.iterator();
-		list.delete();
-		//iterator.hasNext();
+		try {
+			iterator.next();
+			iterator.next();
+		} catch (NoSuchElementException n){
+			i = 1;
+		}
+		assertInt(i,1,"The no such elem Exception  when calling next while there is no next is not thrown");
 		
-		iterator = (MyIterator<Integer>) list.iterator();
-		list.add(2);
-		//iterator.remove();
 		
-		
+	}
+
+	public void assertInt(int actual, int expected, String errMsg) {
+		if(actual != expected) {
+			System.out.println(errMsg);
+		}
 	}
 
 }

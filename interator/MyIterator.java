@@ -12,7 +12,8 @@ public class MyIterator<E> implements Iterator<E>
 	MyEntry<E> currentEntry;
 	
 	private int modCountAtCreation;
-	private int nextCounter;
+	private int nextCounter = 0;
+	private int lastNextCounter  = 0;
 	
 	
 	public MyIterator(MyList<E> list, MyEntry<E> first){
@@ -53,14 +54,17 @@ public class MyIterator<E> implements Iterator<E>
 	public void remove() {
 		if(modCountAtCreation != list.getModCount()) {
 			throw new ConcurrentModificationException();
+		} else if(lastNextCounter == nextCounter) {
+			throw new IllegalStateException("Delete cant be called twice without advancing forward");
 		}
 		
 		list.reset();
-		for(int i = 0; i < nextCounter; i++) {
+		for(int i = 0; i < nextCounter - 1; i++) {
 			list.advance();
 		}
 		list.delete();
 		modCountAtCreation++;
+		lastNextCounter = nextCounter;
 		
 	}
 

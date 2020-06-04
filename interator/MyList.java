@@ -101,7 +101,6 @@ public class MyList<E> implements Cloneable, Iterable<E> {
 		MyEntry<E> newone = new MyEntry<E>(x, pos.next);
 
 		pos.next = newone;
-		
 		increaseModCount();
 	}
 
