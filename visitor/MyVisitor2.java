@@ -13,7 +13,6 @@ public class MyVisitor2<E extends String> implements Visitor<E>
 			System.out.println("Element gefunden bei Position " + foundAt);
 			found = false;
 		}
-		// TODO Auto-generated method stub
 		return found;
 	}
 

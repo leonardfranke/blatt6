@@ -24,7 +24,7 @@ public class TestWrapper
 	}
 	
 	
-	public void testGetArrayFromFileName() {		//Legt eine Datei an die das Array enthält. Anschleißend wir getestet ob ein neuer Wrapper die vorhandene Datei richtig ausließt
+	public void testGetArrayFromFileName() {		//Legt eine Datei an die das Array enthaelt. Anschliessend wir getestet ob ein neuer Wrapper die vorhandene Datei richtig ausliest
 		int[] arr = {3,6,9,2,4,6,8};
 		Wrapper wrapper = new Wrapper(arr, "myArray2.txt");
 		
@@ -34,8 +34,8 @@ public class TestWrapper
 		}		
 	}
 	
-	public void testChanges() {									//Legt zuerst eine Datei an, die das Array enthält. 
-		int[] arr = {1,3,5,7,3,9,3,5,2};						//Dann wird der Wrapper bearbeiten und anschließend überprüft ob die Veränderung auch in der Datei gemacht wurden
+	public void testChanges() {									//Legt zuerst eine Datei an, die das Array enthaelt.
+		int[] arr = {1,3,5,7,3,9,3,5,2};						//Dann wird der Wrapper bearbeiten und anschliessend ueberprueft ob die Veraenderung auch in der Datei gemacht wurden
 		Wrapper wrapper = new Wrapper(arr, "myArray3.txt");
 		
 		for(int i = 0; i < arr.length; i++) {
@@ -49,7 +49,7 @@ public class TestWrapper
 	}
 	
 	public void testOverwritingWholeFile() {						//Legt zuerst eine Datei an, mit einem (alten) Array
-		int[] arrAlt = {3,6,9,2,4,6,8};								//Überschreibt dann die Datei mit einem komplett anderen Array und prüft ob die Werte in der Datei und die größe des Arrays stimmen
+		int[] arrAlt = {3,6,9,2,4,6,8};								//ueberschreibt dann die Datei mit einem komplett anderen Array und prueft ob die Werte in der Datei und die groesse des Arrays stimmen
 		Wrapper wrapper1 = new Wrapper(arrAlt, "myArray4.txt");
 		
 		int[] arrNeu = {1,2,3,4};

@@ -7,26 +7,28 @@ import java.util.ArrayList;
 
 public class Wrapper
 {
-	int[] array;
+	int[] numbers;
 	String fileName;
 	RandomAccessFile file;
 	
 	public Wrapper(int[] array, String fileName) {
 		this.file = getFileFromFileName(fileName);
 		this.fileName = fileName;
-		this.array = array;
+		this.numbers = array;
 		writeArrayIntoFile();
 	}
 	
 	public Wrapper(String fileName) {
 		this.file = getFileFromFileName(fileName);
 		this.fileName = fileName;
-		this.array = getArrayFromFile(this.file);
+		this.numbers = getArrayFromFile(this.file);
 	}	
 	
 	private RandomAccessFile getFileFromFileName(String fileName) {
+		RandomAccessFile f = null;
 		try {
-			return new RandomAccessFile(fileName,"rw");
+			f = new RandomAccessFile(fileName,"rw");
+			return f;
 		} catch (FileNotFoundException e) {
 			System.err.println("File not found!");
 			e.printStackTrace();
@@ -37,15 +39,15 @@ public class Wrapper
 	
 	
 	public int get(int pos) {
-		return this.array[pos];
+		return this.numbers[pos];
 	}
 	
 	public int size() {
-		return this.array.length;
+		return this.numbers.length;
 	}
 	
 	public void set(int pos, int val) {
-		this.array[pos] = val;		
+		this.numbers[pos] = val;
 		try {
 			this.file.seek(pos*4);
 			this.file.writeInt(val);
@@ -68,8 +70,8 @@ public class Wrapper
 		try {
 			this.file.setLength(0);
 			this.file.seek(0);
-			for(int i = 0; i < this.array.length; i++) {
-				this.file.writeInt(this.array[i]);
+			for(int i = 0; i < this.numbers.length; i++) {
+				this.file.writeInt(this.numbers[i]);
 			}			
 		} catch (IOException e) {
 			System.err.println("Error while overwriting the new array");
